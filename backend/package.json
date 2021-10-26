@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node ./dist/server.js"
+  },
+  "dependencies": {
+    "fastify": "^3.22.0",
+    "fastify-socket.io": "^2.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^4.4.4"
+  }
+}

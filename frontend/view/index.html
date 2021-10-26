@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Socket.IO テストサイト</title>
+  </head>
+  <body>
+    <form id="frm-post">
+      <input type="text" id="msg" />
+      <button>送信</button>
+    </form>
+
+    <ul id="msglist"></ul>
+
+    <script
+      src="https://cdn.socket.io/4.3.2/socket.io.min.js"
+      integrity="sha384-KAZ4DtjNhLChOB/hxXuKqhMLYvx3b5MlT55xPEiNmREKRzeEm+RVPlTnAn0ajQNs"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      // サーバへ接続
+      const socket = io("http://localhost:3000");
+
+      // 接続時
+      // 再接続するたびに新しいハンドラーが作られてしまう。
+      // そのためこの中にイベントハンドラーは登録しない。
+      socket.on("connect", () => {
+        console.log(`connected:${socket.connected}`);
+        console.log(`connected:${socket.id}`);
+      });
+
+      // 切断時
+      socket.on("disconnect", () => {
+        console.log(`connected:${socket.connected}`);
+        console.log(`connected:${socket.id}`);
+      });
+
+      // 送信処理
+      document.querySelector("#frm-post").addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // 入力内容を取得する
+        const msg = document.querySelector("#msg");
+        if (msg.value === "") {
+          return false;
+        }
+
+        // Socket.ioサーバへ送信
+        socket.emit("post", { text: msg.value });
+
+        // 発言フォームを空にする
+        msg.value = "";
+      });
+
+      socket.on("member-post", (msg) => {
+        console.log("member-post");
+        const list = document.querySelector("#msglist");
+        const li = document.createElement("li");
+        li.innerHTML = `${msg.text}`;
+        list.insertBefore(li, list.firstChild);
+      });
+    </script>
+  </body>
+</html>
