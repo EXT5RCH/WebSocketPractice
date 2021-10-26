@@ -1,0 +1,2 @@
+# WebSocketPractice
+WebSocketの使い方確認用リポジトリ
