@@ -1,9 +1,6 @@
 # WebSocketPractice
 WebSocketの使い方確認用リポジトリ
 
-# 概要
-- frontend、backendに分ける必要は全くないのですが、興味本位で分けました。
-
 # 使い方
 1. firewallの設定
    - localの8080（フロントエンド用）,3000（バックエンド用）を解放する。
