@@ -52,6 +52,7 @@
         msg.value = "";
       });
 
+      // 受信処理
       socket.on("member-post", (msg) => {
         console.log("member-post");
         const list = document.querySelector("#msglist");

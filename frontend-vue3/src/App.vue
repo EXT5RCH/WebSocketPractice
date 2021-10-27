@@ -40,6 +40,7 @@ export default defineComponent({
       socket.emit("post", { text: e });
     };
 
+    // 受信処理
     socket.on("member-post", (msg) => {
       inputText.value = msg.text;
     });
