@@ -1,7 +1,6 @@
 <template>
   <form :id="formId">
     <input :id="inputId" v-model="inputValue" type="text" />
-    <button @click.prevent="handleClick">送信</button>
   </form>
 </template>
 
