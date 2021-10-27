@@ -1,5 +1,5 @@
 # WebSocketPractice
-WebSocketの使い方確認用リポジトリ
+`socket.io`を使ってWebSocketについて勉強するためのリポジトリ
 
 # 使い方
 1. firewall の設定
