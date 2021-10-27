@@ -1,25 +1,19 @@
 <template>
-  <div>
-    <Form v-model="inputText" @click="submit" />
-    <MessageList :messages="messages" />
-  </div>
+  <Form :modelValue="inputText" @update:modelValue="submit($event)" />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
 import Form from "./components/Form.vue";
-import MessageList from "./components/MessageList.vue";
 import io from "socket.io-client";
 
 export default defineComponent({
   name: "App",
   components: {
     Form,
-    MessageList,
   },
   setup() {
     const inputText = ref<string>("");
-    const messages = ref<string[]>([]);
 
     // サーバへ接続
     const socket = io("http://localhost:3000");
@@ -39,21 +33,18 @@ export default defineComponent({
     });
 
     // 送信処理
-    const submit = () => {
-      if (inputText.value === "") return false;
+    const submit = (e: string) => {
+      if (e === "") return false;
 
       // Socket.ioサーバへ送信
-      socket.emit("post", { text: inputText.value });
-
-      // 発言フォームを空にする
-      inputText.value = "";
+      socket.emit("post", { text: e });
     };
 
     socket.on("member-post", (msg) => {
-      messages.value.push(msg.text);
+      inputText.value = msg.text;
     });
 
-    return { inputText, messages, submit };
+    return { inputText, submit };
   },
 });
 </script>
