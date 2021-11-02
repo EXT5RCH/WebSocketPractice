@@ -1,7 +1,5 @@
 <template>
-  <form :id="formId">
-    <input :id="inputId" v-model="inputValue" type="text" />
-  </form>
+  <input :id="inputId" v-model="inputValue" type="text" />
 </template>
 
 <script lang="ts">
@@ -14,10 +12,6 @@ export default defineComponent({
     modelValue: {
       type: String,
       default: "",
-    },
-    formId: {
-      type: String,
-      default: "frm-post",
     },
     inputId: {
       type: String,
